@@ -28,6 +28,10 @@ public class NetworkOptimization {
             return fragile;
         }
 
+        public int getId() {
+            return id;
+        }
+
         public static final Comparator<Package> BY_PRIORITY_THEN_FRAGILITY_DESC_THEN_WEIGHT = new Comparator<Package>() {
             @Override
             public int compare(Package package1, Package package2) {
@@ -41,7 +45,7 @@ public class NetworkOptimization {
                     return 0;
                 }
             }
-        }
+        };
     }
 
     static class Connection {
@@ -65,11 +69,52 @@ public class NetworkOptimization {
     }
 
     public static List<Integer> sortPackages(List<Package> packages) {
-        // TODO: Implement package sorting
-        // Sort by: 1) priority (1->3)
-        //         2) fragile before non-fragile
-        //         3) weight (lightest first)
-        return new ArrayList<>();
+        List<Package> sortedPackages = sortPackageLists(packages);
+        List<Integer> ids = new ArrayList<>();
+
+        for(Package pack : sortedPackages) {
+            ids.add(pack.getId());
+        }
+
+        return ids;
+    }
+
+    public static List<Package> sortPackageLists(List<Package> packages) {
+        int n = packages.size();
+        if(n > 1) {
+            List<Package> firstHalf = sortPackageLists(packages.subList(0, (int) Math.floor((double) n / 2) - 1));
+            List<Package> secondHalf = sortPackageLists(packages.subList((int) Math.floor((double) n / 2), n - 1));
+            return merge(firstHalf, secondHalf);
+        } else {
+            return packages;
+        }
+    }
+
+    public static List<Package> merge(List<Package> firstList, List<Package> secondList) {
+        int firstIndex = 0;
+        int secondIndex = 0;
+        List<Package> mergedPackages = new ArrayList<>();
+
+        while(firstIndex < firstList.size() && secondIndex < secondList.size()) {
+            if(Package.BY_PRIORITY_THEN_FRAGILITY_DESC_THEN_WEIGHT.compare(firstList.get(firstIndex), secondList.get(secondIndex)) <= 0) {
+                mergedPackages.add(firstList.get(firstIndex));
+                firstIndex++;
+            } else {
+                mergedPackages.add(secondList.get(secondIndex));
+                secondIndex++;
+            }
+        }
+        if(firstIndex == firstList.size()) {
+            for(int i = secondIndex; i < secondList.size(); i++) {
+                mergedPackages.add(secondList.get(i));
+            }
+        } else {
+            for(int i = firstIndex; i < secondList.size(); i++) {
+                mergedPackages.add(firstList.get(i));
+            }
+        }
+
+        return mergedPackages;
     }
 
     public static PathResult findShortestPath(
