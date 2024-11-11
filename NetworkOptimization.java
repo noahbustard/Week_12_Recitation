@@ -76,9 +76,37 @@ public class NetworkOptimization {
             Map<String, List<Connection>> cities,
             String start,
             String end) {
+            
+            int numCities = cities.size();
+            int[] distance = new int[numCities];
+            boolean[] visited = new boolean[numCities];
+            
+            for (int i = 0; i < numCities; i++){
+                distance[i] = Integer.MAX_VALUE;
+                visited[i] = false;
+            }
+
+            distance[0] = 0;
+            for(int loop = 0; loop < numCities - 1; loop++){
+                int x = minDistance(distance, visited, cities);
+            }
+
+
+            
+
+            
         
         // TODO: Implement Dijkstra's algorithm
         return new PathResult(new ArrayList<>(), 0);
+    }
+
+    public static int minDistance(int[] distance, boolean[] visitied, Map<String, List<Connection>> cities){
+        int min = Integer.MAX_VALUE;
+        int min_index = -1;
+
+        for(int i = 0; i < cities.size(); )
+
+
     }
 
     public static void main(String[] args) {
