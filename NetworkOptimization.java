@@ -86,28 +86,20 @@ public class NetworkOptimization {
         Map<String, List<Connection>> cities = new HashMap<>();
         cities.put("A", Arrays.asList(
             new Connection("B", 456), new Connection("C", 231),
-            new Connection("E", 912), new Connection("L", 445),
-            new Connection("D",111), new Connection("F", 275)));
+            new Connection("E", 912)));
         cities.put("B", Arrays.asList(
-            new Connection("A", 456), new Connection("C", 338),
-            new Connection("G", 567), new Connection("H", 789),
-            new Connection("E", 294), new Connection("D", 222)));
+            new Connection("A", 456), new Connection("C", 338)));
         cities.put("C", Arrays.asList(
             new Connection("A", 231), new Connection("B", 338),
-            new Connection("G", 333), new Connection("H", 444),
-            new Connection("E", 194), new Connection("D", 123)));
+            new Connection("D", 445)));
         cities.put("D", Arrays.asList(
-            new Connection("A", 111), new Connection("B", 222),
-            new Connection("C", 123), new Connection("H", 456),
-            new Connection("E", 917), new Connection("K", 486)));
+            new Connection("C", 445), new Connection("E", 234),
+            new Connection("F", 567)));
         cities.put("E", Arrays.asList(
-            new Connection("A", 912), new Connection("B", 294),
-            new Connection("C", 194), new Connection("D", 917),
-            new Connection("F", 462), new Connection("G", 1087)));
+            new Connection("A", 912), new Connection("D", 234),
+            new Connection("F", 345)));
         cities.put("F", Arrays.asList(
-            new Connection("A", 275), new Connection("L", 283),
-            new Connection("J", 195), new Connection("H", 999),
-            new Connection("E", 462), new Connection("G", 107)));
+            new Connection("D", 567), new Connection("E", 345)));
         
         List<Package> packages = Arrays.asList(
             new Package(1, 487, 1, true),
