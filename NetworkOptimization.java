@@ -149,8 +149,9 @@ public class NetworkOptimization {
         int min = Integer.MAX_VALUE;
         int min_index = -1;
 
-        for(int i = 0; i < cities.size(); )
-
+        int j = 0;
+        
+        return j;
 
     }
 
