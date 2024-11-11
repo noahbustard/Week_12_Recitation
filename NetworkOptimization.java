@@ -15,6 +15,33 @@ public class NetworkOptimization {
             this.priority = priority;
             this.fragile = fragile;
         }
+
+        public int getWeight() {
+            return weight;
+        }
+
+        public int getPriority() {
+            return priority;
+        }
+
+        public boolean isFragile() {
+            return fragile;
+        }
+
+        public static final Comparator<Package> BY_PRIORITY_THEN_FRAGILITY_DESC_THEN_WEIGHT = new Comparator<Package>() {
+            @Override
+            public int compare(Package package1, Package package2) {
+                if(package1.getPriority() != package2.getPriority()) {
+                    return package1.getPriority() - package2.getPriority();
+                } else if(package1.isFragile() != package2.isFragile()) {
+                    return -Boolean.compare(package1.isFragile(), package2.isFragile());
+                } else if(package1.getWeight() != package2.getWeight()) {
+                    return package1.getWeight() - package2.getWeight();
+                } else {
+                    return 0;
+                }
+            }
+        }
     }
 
     static class Connection {
